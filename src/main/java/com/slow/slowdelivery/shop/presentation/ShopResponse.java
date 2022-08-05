@@ -1,15 +1,17 @@
 package com.slow.slowdelivery.shop.presentation;
 
 import com.slow.slowdelivery.shop.application.ShopResponseDto;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Getter
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ShopResponse {
 
     private Long id;
     private String name;
     private String description;
-
-    private ShopResponse() {
-    }
 
     public ShopResponse(Long id, String name, String description) {
         this.id = id;
@@ -20,20 +22,8 @@ public class ShopResponse {
     public static ShopResponse from(ShopResponseDto shopResponseDto) {
         return new ShopResponse(
                 shopResponseDto.getId(),
-                shopResponseDto.getName(),
-                shopResponseDto.getDescription()
+                shopResponseDto.getBasicInfo().getName(),
+                shopResponseDto.getBasicInfo().getDescription()
         );
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
     }
 }

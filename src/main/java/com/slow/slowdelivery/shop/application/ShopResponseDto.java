@@ -1,36 +1,25 @@
 package com.slow.slowdelivery.shop.application;
 
+import com.slow.slowdelivery.shop.domain.BasicInfo;
 import com.slow.slowdelivery.shop.domain.Shop;
+import com.slow.slowdelivery.shop.domain.ShopDocument;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Getter
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ShopResponseDto {
 
     private Long id;
-    private String name;
-    private String description;
+    private BasicInfo basicInfo;
 
-    private ShopResponseDto() {
-    }
-
-    public ShopResponseDto(Long id, String name, String description) {
+    public ShopResponseDto(Long id, BasicInfo basicInfo) {
         this.id = id;
-        this.name = name;
-        this.description = description;
+        this.basicInfo = basicInfo;
     }
 
-    public static ShopResponseDto from(Shop shop) {
-        return new ShopResponseDto(shop.getId(), shop.getName(), shop.getDescription());
+    public static ShopResponseDto from(ShopDocument shop) {
+        return new ShopResponseDto(shop.getId(), shop.getBasicInfo());
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
 }

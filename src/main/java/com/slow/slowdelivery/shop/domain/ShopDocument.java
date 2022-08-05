@@ -4,24 +4,24 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.elasticsearch.annotations.Document;
 
-import javax.persistence.*;
+import javax.persistence.Embedded;
+import javax.persistence.Id;
 
-
-@Entity
 @Getter
+@Document(indexName = "shops")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Shop {
+public class ShopDocument {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Embedded
     private BasicInfo basicInfo;
 
     @Builder
-    public Shop(BasicInfo basicInfo){
+    public ShopDocument(Long id, BasicInfo basicInfo){
+        this.id = id;
         this.basicInfo = basicInfo;
     }
 }
